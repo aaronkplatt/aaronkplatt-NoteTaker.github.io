@@ -6,14 +6,14 @@ const path = require("path");
 
 // need fs to read and write to files
 const fs = require("fs");
-// let db = require("./db/db.json")
+let db = require("./db/db.json")
 // const shortid = require('shortid');
 
 // Creates an express server (if lost look at 08-StarWars-1)
 const app = express();
 
 //localhost:3000
-const PORT = 3000;
+const PORT = 5000;
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
@@ -25,6 +25,10 @@ app.use(express.json());
 app.get("/notes", function(req, res) {
     res.sendFile(path.join(__dirname, "./public/notes.html"));
   });
+
+app.get("*", function(req, res) {
+  res.sendFile(path.join(__dirname, "./public/index.html"));
+});
 
 
 
