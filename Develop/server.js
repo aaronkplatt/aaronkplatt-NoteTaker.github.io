@@ -12,7 +12,7 @@ let db = require("./db/db.json")
 // Creates an express server (if lost look at 08-StarWars-1)
 const app = express();
 
-//localhost:3000
+//localhost5000
 const PORT = 5000;
 
 // Sets up the Express app to handle data parsing
@@ -30,8 +30,22 @@ app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "./public/index.html"));
 });
 
+// GET `/api/notes` - Should read the `db.json` file and return all saved notes as JSON.
+app.get("/api/notes", function(req, res) {
+    res.json(db);
+  });
 
-
+app.post("/api/notes", function (req, res) {
+  var newNote = {
+    id: shortid.generate(),
+    title: req.body.title,
+    text: req.body.text,
+  };
+  
+  db.push(newNote);
+  fs.writeFileSync(path.join (__dirname, "./db/db.json"), JSON.stringify(db));
+  res.json(db);
+});
 
 
 // Starts the server to begin listening
