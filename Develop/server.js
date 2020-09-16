@@ -3,6 +3,7 @@ const express = require("express");
 
 // Filename path
 const path = require("path");
+const http = require("http");
 
 // need fs to read and write to files
 const fs = require("fs");
@@ -18,6 +19,8 @@ const PORT = 5000;
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static('public'));
+app.use(express.static('db'));
 
 // Routes
 // =============================================================
@@ -27,7 +30,7 @@ app.get("/notes", function(req, res) {
   });
 
 app.get("*", function(req, res) {
-  res.sendFile(path.join(__dirname, "./public/index.html"));
+  res.sendFile(path.join(__dirname, "./public/assets/js/index.js"));
 });
 
 // GET `/api/notes` - Should read the `db.json` file and return all saved notes as JSON.

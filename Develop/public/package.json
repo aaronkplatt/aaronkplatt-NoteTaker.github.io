@@ -1,0 +1,22 @@
+{
+  "name": "aaronkplatt-notetaker.github.io",
+  "version": "1.0.0",
+  "description": "## Description",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaronkplatt/aaronkplatt-NoteTaker.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aaronkplatt/aaronkplatt-NoteTaker.github.io/issues"
+  },
+  "homepage": "https://github.com/aaronkplatt/aaronkplatt-NoteTaker.github.io#readme",
+  "dependencies": {
+    "json": "^10.0.0"
+  }
+}
