@@ -11,8 +11,8 @@ let PORT = process.env.PORT || 8080;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(__dirname, 'public'));
-app.use(express.static(__dirname, 'db'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'db')));
 
 // Routes
 // =============================================================
@@ -39,7 +39,7 @@ app.post('/api/notes', function (req, res) {
     text: req.body.text,
   };
   //console
-  console.log(newNote + " post is working");
+  console.log(newNote);
 
   db.push(newNote);
   fs.writeFileSync(path.join (__dirname, "./db/db.json"), JSON.stringify(db));
@@ -49,15 +49,15 @@ app.post('/api/notes', function (req, res) {
 
 //DELETE `/api/notes/:id` - Should receive a query parameter containing the id of a note to delete. This means you'll need to find a way to give each note a unique `id` when it's saved. In order to delete a note, you'll need to read all notes from the `db.json` file, remove the note with the given `id` property, and then rewrite the notes to the `db.json` file.
 
-// app.delete("/api/notes/:id", function(req, res) {
-  // db = db.filter((note) => note.id !== req.params.id);
-  // console.log(db);
+app.delete("/api/notes/:id", function(req, res) {
+  db = db.filter((note) => note.id !== req.params.id);
+  console.log(db);
 
-  // fs.writeFile(path.join (__dirname, "./db/db.json"), JSON.stringify(db), function (err) {
-    // if (err)throw err;
-    // res.sendStatus(200);
-  // });
-// });
+  fs.writeFile(path.join (__dirname, "./db/db.json"), JSON.stringify(db), function (err) {
+    if (err)throw err;
+    res.sendStatus(200);
+  });
+});
 
 
 // Starts the server to begin listening
@@ -69,3 +69,4 @@ app.listen(PORT, function(err) {
     console.log("Listening on: " + PORT);
   }
 })
+console.log(shortid.generate());
