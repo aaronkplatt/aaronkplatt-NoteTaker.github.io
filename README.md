@@ -15,7 +15,7 @@
 * Download my files in its entirety.
 * Using your terminal, navigate to the folder on your desktop.
 * Use command "npm start" in your terminal without the quotations.
-  or use this link: https://serene-sea-85824.herokuapp.com/notes
+  or use this link: https://serene-sea-85824.herokuapp.com
 
 # Summary
 
