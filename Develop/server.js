@@ -4,6 +4,7 @@ const moment = require("moment");
 const express = require("express");
 const shortid = require('shortid');
 const db = require("./db/db.json");
+const { relativeTimeRounding } = require("moment");
 
 //set up Express App
 const app = express();
@@ -39,7 +40,7 @@ app.post('/api/notes', function (req, res) {
     text: req.body.text,
   };
   //console
-  console.log(newNote);
+  // console.log(newNote);
 
   db.push(newNote);
   fs.writeFileSync(path.join (__dirname, "./db/db.json"), JSON.stringify(db));
@@ -47,17 +48,52 @@ app.post('/api/notes', function (req, res) {
 });
 
 //DELETE `/api/notes/:id` - Should receive a query parameter containing the id of a note to delete. This means you'll need to find a way to give each note a unique `id` when it's saved. In order to delete a note, you'll need to read all notes from the `db.json` file, remove the note with the given `id` property, and then rewrite the notes to the `db.json` file.
-//console.log(db); WORKING ON !!!!!!
+console.log(db); //WORKING ON !!!!!!
 
-app.delete("/api/notes/:id", function(req, res) {
-  db = db.filter((note) => note.id !== req.params.id);
-  console.log(db);
+app.delete('/api/notes/:id', function (req, res) {
+  const requestId = req.params.id
+  notes = JSON.parse(fs.readFileSync(path.join(__dirname, "./db/db.json"), {encoding: 'utf8'}));
+  console.log('THIS IS THE ORIGINAL NOTES --------------');
+  console.log(notes);
+  
+  //this creates the new updated notes
+  newNotes = notes.filter(notes => notes.id !== requestId);
+  let newArray = newNotes;
+  console.log("this is after deletion --------------------------")
+  console.log(newArray);
 
-  fs.writeFile(path.join (__dirname, "./db/db.json"), JSON.stringify(db), function (err) {
-    if (err)throw err;
-    res.sendStatus(200);
-  });
-});
+  // db.push(newArray)
+  fs.writeFile(path.join(__dirname, "./db/db.json"), JSON.stringify(newArray), function(err){
+    console.log("removed note from file");
+    if (err) console.log(err);
+    //if it worked
+  })
+  // res.json(newArray);
+
+  // // db.push(newNotes);
+  // res.json(newNotes);
+
+  
+  // 
+  // console.log(db)
+  // fs.writeFile(path.join(__dirname, "./db/db.json"), JSON.stringify(newNotes), function(err){
+    //   if (err) console.log(err);
+    //   // if it worked
+    //   console.log("removed note from file");
+    // })
+    // fs.writeFileSync(path.join (__dirname, "./db/db.json"), JSON.stringify(db));
+    // console.log(notes);
+    
+    // db = db.filter((notes) => notes.id !== requestId);
+    // console.log(db);
+
+    //  fs.writeFile(path.join(__dirname, "./db/db.json"), JSON.stringify(notes), function (err) {
+      //   if (err)throw err;
+      //   res.sendStatus(200);
+      // });
+      // return;
+      res.send("DELETE Request Called")
+    });
 
 
 // Starts the server to begin listening
