@@ -15,8 +15,7 @@
 * Download my files in its entirety.
 * Using your terminal, navigate to the folder on your desktop.
 * Use command "npm start" in your terminal without the quotations.
-
-or use this link: https://serene-sea-85824.herokuapp.com/
+  or use this link: https://serene-sea-85824.herokuapp.com/notes
 
 # Summary
 
@@ -35,7 +34,7 @@ https://github.com/aaronkplatt/aaronkplatt-NoteTaker.github.io
 
 # Credits
 
-* I want to thank Matthew Rogers for some help and Matt Milici
+* I want to thank Matthew Rogers and Matt Milici for some help cleaning up the application
 
 
 # License
