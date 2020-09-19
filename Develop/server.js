@@ -10,7 +10,7 @@ const { request } = require("http");
 
 //set up Express App
 const app = express();
-let PORT = process.env.PORT || 8080;
+let PORT = process.env.PORT || 3001;
 
 //express stuff
 app.use(express.json());
@@ -41,8 +41,8 @@ app.post('/api/notes', function (req, res) {
   //This posts the data to the html
   db.push(req.body);
   res.json(req.body);
-  console.log("THESE ARE THE NOTES ----------------------------")
-  console.log(req.body);
+  // console.log("THESE ARE THE NOTES ----------------------------")
+  // console.log(req.body);
 });
 
 //DELETE `/api/notes/:id` - Should receive a query parameter containing the id of a note to delete. This means you'll need to find a way to give each note a unique `id` when it's saved. In order to delete a note, you'll need to read all notes from the `db.json` file, remove the note with the given `id` property, and then rewrite the notes to the `db.json` file.
